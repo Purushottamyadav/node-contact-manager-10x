@@ -1,0 +1,11 @@
+{
+  "name": "contact-manger-project",
+  "version": "1.0.0",
+  "description": "Contact Manger",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Purushottam kumar",
+  "license": "ISC"
+}
