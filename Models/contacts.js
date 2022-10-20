@@ -10,4 +10,4 @@ const contactSchema = new mongoose.Schema({
     country: {type:String, required:true},
 });
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("contacts", contactSchema);
