@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-
+app.use(express.json())
 
 const contactroute = require("./routes/contact.js");
 const userroute =require("./routes/user.js")
@@ -11,7 +11,7 @@ app.use('/', userroute);
 
 
 app.use(express.json());
-module.export = app
+module.exports = app
 
 
 
