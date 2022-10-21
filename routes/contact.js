@@ -13,9 +13,7 @@ router.post("/addContact",auth, async (req, res) => {
     
    
     try {
-        // const verifyToken=jwt.verify(token,JWT_SECRET)
-
-          console.log(req.body.user)
+     
 
         const data = await contactModel.create({
             email,
@@ -43,7 +41,9 @@ router.post("/addContact",auth, async (req, res) => {
         })
     }
 })
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id",auth, async (req, res) => {
+
+
     try {
         const deleteContact = await contactModel.findByIdAndDelete({ _id: req.params.id })
         res.status(200).json({
