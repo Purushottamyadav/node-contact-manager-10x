@@ -1,4 +1,5 @@
 const express = require("express");
+const auth=require("../middleware/authn")
 const bodyparser = require("body-parser")
 const router = express.Router();
 const mongoose = require("mongoose")
@@ -6,13 +7,16 @@ const contactModel = require("../Models/contacts")
 const jwt= require("jsonwebtoken")
 const {JWT_SECRET} = require("../keys")
 
-router.post("/addContact", async (req, res) => {
+router.post("/addContact",auth, async (req, res) => {
 
-    const { email, name, designation, company, industry, phone, country, useRef,token } = req.body
+    const { email, name, designation, company, industry, phone, country } = req.body
+    
    
     try {
-        const verifyToken=jwt.verify(token,JWT_SECRET)
-        
+        // const verifyToken=jwt.verify(token,JWT_SECRET)
+
+          console.log(req.body.user)
+
         const data = await contactModel.create({
             email,
             name,
@@ -21,7 +25,7 @@ router.post("/addContact", async (req, res) => {
             industry,
             phone,
             country,
-            useRef
+            useRef:req.user.id
            
 
         })
