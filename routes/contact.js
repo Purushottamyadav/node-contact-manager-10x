@@ -3,14 +3,16 @@ const bodyparser = require("body-parser")
 const router = express.Router();
 const mongoose = require("mongoose")
 const contactModel = require("../Models/contacts")
-
-
+const jwt= require("jsonwebtoken")
+const {JWT_SECRET} = require("../keys")
 
 router.post("/addContact", async (req, res) => {
 
-    const { email, name, designation, company, industry, phone, country, useRef } = req.body
+    const { email, name, designation, company, industry, phone, country, useRef,token } = req.body
+   
     try {
-
+        const verifyToken=jwt.verify(token,JWT_SECRET)
+        
         const data = await contactModel.create({
             email,
             name,
