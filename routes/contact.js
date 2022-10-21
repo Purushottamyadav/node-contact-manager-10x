@@ -39,6 +39,28 @@ router.post("/addContact", async (req, res) => {
         })
     }
 })
+
+///code to fetch data
+
+router.get("/contacts",async(req,res)=>{
+    const token = req.headers.token;
+    try{
+        console.log(token);
+        const verify = jwt.verify(token,JWT_SECRET);
+        const records = await contactModel.find({useRef:token}).limit(10);
+        if(records){
+            res.json({
+                records
+            });
+        }
+    }catch(err){
+        res.send({
+            message: err.message
+        })
+    }
+})
+
+
 router.delete("/delete/:id", async (req, res) => {
     try {
         const deleteContact = await contactModel.findByIdAndDelete({ _id: req.params.id })

@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
-
+const bodyparser = require("body-parser");
 app.use(express.json())
 
 const contactroute = require("./routes/contact.js");
 const userroute =require("./routes/user.js")
-
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({extended:true}))
 app.use('/', contactroute);
 app.use('/', userroute);
 
