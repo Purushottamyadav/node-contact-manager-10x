@@ -4,12 +4,17 @@ const mongoose = require("mongoose")
 const usermodel= require("../Models/user")
 const bcrypt = require("bcryptjs");
 const user = require("../Models/user");
-const jwt =require("jsonwebtoken")
+const jwt =require("jsonwebtoken");
+
+
 const {JWT_SECRET} = require("../keys")
 
 router.get((req,res)=>{
     res.send("hello world")
 })
+
+ 
+
 
 
 router.post('/signup',(req,res)=>{
@@ -46,6 +51,7 @@ router.post('/signup',(req,res)=>{
 
 router.post('/signin',(req,res)=>{
     const {email,password}= req.body
+    console.log(req.body)
     if(!email || !password){
         return res.status(422).res.json({error:"please add all fields"})
      }
@@ -59,7 +65,7 @@ router.post('/signin',(req,res)=>{
         if(match){
             // 
             const token = jwt.sign({id:savedUser.id},JWT_SECRET)
-            res.json({token})
+            res.json({message:"success",token})
             
         }else{
             return res.status(422).json({error:"please enter valid info"})

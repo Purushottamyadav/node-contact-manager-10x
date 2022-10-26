@@ -3,8 +3,8 @@ const app = express();
 const bodyParser=require("body-parser");
 const cors = require("cors");
 
-app.use(express.json())
 app.use(cors())
+app.use(express.json())
 const contactroute = require("./routes/contact.js");
 const userroute =require("./routes/user.js")
 app.use(bodyParser.json())
