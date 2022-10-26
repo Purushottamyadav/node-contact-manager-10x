@@ -5,7 +5,8 @@ const router = express.Router();
 const mongoose = require("mongoose")
 const contactModel = require("../Models/contacts")
 const jwt = require("jsonwebtoken")
-const { JWT_SECRET } = require("../keys")
+const { JWT_SECRET } = require("../keys");
+const cors = require("cors");
 
 //api to save record
 router.post("/addContact", auth, async (req, res) => {
