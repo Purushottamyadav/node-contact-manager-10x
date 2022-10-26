@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
 const bodyParser=require("body-parser")
+const cors = require("cors")
 
+app.use(cors())
 app.use(express.json())
 
 const contactroute = require("./routes/contact.js");
