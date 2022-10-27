@@ -3,14 +3,21 @@ const router = express.Router();
 const mongoose = require("mongoose")
 const usermodel= require("../Models/user")
 const bcrypt = require("bcryptjs");
-const user = require("../Models/user");
 const jwt =require("jsonwebtoken");
 
 
 const {JWT_SECRET} = require("../keys")
 
-router.get((req,res)=>{
-    res.send("hello world")
+router.get("/getUser",async(req,res)=>{
+    // res.send("hello world")
+    try{const userdata = await usermodel.findOne({_id:req.headers.id});
+    res.json({
+        userdata
+    })}catch(err){
+        res.json({
+            res:err
+        })
+    }
 })
 
  
@@ -55,7 +62,7 @@ router.post('/signin',(req,res)=>{
     if(!email || !password){
         return res.status(422).res.json({error:"please add all fields"})
      }
-     user.findOne({email:email})
+     usermodel.findOne({email:email})
      .then(savedUser=>{
         if(!savedUser){
             return res.status(422).json({error:"please enter valid info"})
