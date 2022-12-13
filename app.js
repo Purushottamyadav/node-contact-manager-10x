@@ -3,18 +3,14 @@ const app = express();
 const bodyParser=require("body-parser");
 const cors = require("cors");
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 const contactroute = require("./routes/contact.js");
-const userroute =require("./routes/user.js")
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:true}))
+const userroute =require("./routes/user.js");
 app.use('/', contactroute);
 app.use('/', userroute);
 
-
-
-app.use(express.json());
 module.exports = app
 
 
